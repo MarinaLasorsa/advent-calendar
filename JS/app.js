@@ -15,15 +15,38 @@ source.forEach((el, i) => {
 
     //definisco l'elemento img come stringa che ha la variabile icon nel src
     const imgString = `<img class="icon" src="images/icons/${icon}.png" />`
+
     //aggiungo elemento img dentro al grid element
     gridElement.innerHTML += imgString;
-
     //aggiungo numero dentro al grid element
     gridElement.innerHTML += num;
 
     //metto grid element nel grid container
     gridContainer.append(gridElement);
+
+    //quando grid element viene cliccato
+    gridElement.addEventListener("click", function () {
+        //definisco modale
+        const modal = document.querySelector(".modal");
+        //cambio il suo display status in flex
+        modal.style.display = "flex"
+
+        //definisco bottone chiudi
+        const closeBtn = document.querySelector(".closeBtn");
+        //al suo click cambio il display status di modal in none
+        closeBtn.onclick = function () {
+            modal.style.display = "none"
+        }
+    })
+
+
 })
+
+
+
+
+
+
 
 
 
