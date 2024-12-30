@@ -1,3 +1,6 @@
+//prendo lo stato di localStorage convertendolo in formato JSON
+const clickedElements = JSON.parse(localStorage.getItem("clickedElements")) || [];
+
 //definisco il container
 const gridContainer = document.querySelector(".grid-container");
 
@@ -24,8 +27,29 @@ source.forEach((el, i) => {
     //metto grid element nel grid container
     gridContainer.append(gridElement);
 
+    //se grid element è già in localStorage
+    if (clickedElements.includes(i)) {
+        //creo un overlay element
+        const overlayElement = document.createElement("div");
+        //gli do' la classe overlay
+        overlayElement.classList.add("overlay")
+        //lo aggiungo a grid element
+        gridElement.prepend(overlayElement);
+
+        //tolgo sfondo a grid element
+        gridElement.style.backgroundColor = "transparent";
+    }
+
     //quando grid element viene cliccato
     gridElement.addEventListener("click", function () {
+
+        //se grid element non è già in localStorage
+        if (!clickedElements.includes(i)) {
+            //aggiungilo all'array di localStorage
+            clickedElements.push(i)
+            //salvo in localStorage convertendolo in una stringa
+            localStorage.setItem("clickedElements", JSON.stringify(clickedElements));
+        }
 
         //crea un overlay element
         const overlayElement = document.createElement("div");
@@ -71,17 +95,31 @@ source.forEach((el, i) => {
         //cambio il display status di modal in flex
         modal.style.display = "flex"
 
-        //definisco bottone chiudi
-        const closeBtn = document.querySelector(".closeBtn");
-        //al suo click cambio il display status di modal in none
-        closeBtn.onclick = function () {
-            modal.style.display = "none"
-        }
     })
-
 
 })
 
+//definisco bottone chiudi
+const closeBtn = document.querySelector(".closeBtn");
+
+//al suo click cambio il display status di modal in none
+closeBtn.addEventListener("click", function () {
+
+    const modal = document.querySelector(".modal-bg");
+
+    modal.style.display = "none";
+});
+
+//definisco bottone reset
+const resetBtn = document.querySelector(".resetBtn");
+
+//al suo click rimuovo elementi cliccati da localstorage
+resetBtn.addEventListener("click", function () {
+    localStorage.removeItem("clickedElements");
+
+    //riavvio la pagina
+    location.reload();
+})
 
 
 

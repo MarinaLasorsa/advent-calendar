@@ -23,9 +23,16 @@ body {
     margin: 0 auto;
 }
 
+.col {
+    width: 33%;
+}
+
 /*HEADER*/
 
 .page-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
     padding-top: 30px;
     background-color: blue;
     color: white;
@@ -36,6 +43,26 @@ body {
     max-width: 992px;
     height: 250px;
     border-radius: 0 0 20px 20px;
+}
+
+.section-left {
+    padding-left: 20px;
+}
+
+.btn-container {
+    padding-right: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.resetBtn {
+    border: none;
+    display: inline-block;
+    background-color: #E53F28;
+    color: white;
+    padding: 5px 10px;
+    font-size: 15px;
 }
 
 /*MAIN*/
